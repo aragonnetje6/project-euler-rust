@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::time::Instant;
 
 fn is_prime(n: i32, primes: &Vec<i32>) -> bool {
     for prime in primes {
@@ -53,7 +54,7 @@ fn get_all_prime_decompositions_under(n: i32) -> HashMap<i32, HashMap<i32, i32>>
     return decompositions;
 }
 
-fn get_all_phi_under(n: i32) -> HashMap<i32, i32> {
+pub fn get_all_phi_under(n: i32) -> HashMap<i32, i32> {
     let mut phis: HashMap<i32, i32> = HashMap::new();
     let decompositions = get_all_prime_decompositions_under(n);
     println!("Decompositions done");
@@ -68,12 +69,19 @@ fn phi(decomposition: HashMap<i32, i32>) -> i32 {
     decomposition.iter().fold(1, |current, (prime, pow)| { current * prime.pow((pow - 1) as u32) * (prime - 1) })
 }
 
-pub fn get_phi_ratios_under(n: i32) -> HashMap<i32, f32> {
+fn get_phi_ratios_under(n: i32) -> HashMap<i32, f32> {
     return HashMap::from_iter(get_all_phi_under(n).iter().map(|(k, v)| { (k.clone(), *k as f32 / *v as f32) }).collect::<Vec<_>>());
 }
 
-pub fn get_max_phi_ratio_under(n: i32) -> (i32, f32) {
+fn get_max_phi_ratio_under(n: i32) -> (i32, f32) {
     let ratios = get_phi_ratios_under(n);
     let (max_n, max_ratio) = ratios.iter().max_by(|(_k1, v1), (_k2, v2)| { v1.partial_cmp(v2).expect("NAN or INF found") }).expect("maximum fail");
     return (max_n.clone(), max_ratio.clone());
+}
+
+pub fn p69() {
+    let before = Instant::now();
+    let (max_n, max_ratio) = get_max_phi_ratio_under(1000001);
+    println!("Done! took {}s", before.elapsed().as_secs_f32());
+    println!("N={}, ratio={}", max_n, max_ratio);
 }
