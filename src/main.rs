@@ -1,4 +1,5 @@
 #![feature(is_sorted)]
+#![feature(int_roundings)]
 
 use crate::p69::{p69};
 use crate::p70::{p70};
