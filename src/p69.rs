@@ -24,6 +24,7 @@ pub fn get_all_primes_under(max: i32) -> Vec<i32> {
     return out;
 }
 
+//todo: implement https://en.wikipedia.org/wiki/Pollard%27s_p_%E2%88%92_1_algorithm
 fn get_prime_decomposition(n: i32, primes: &Vec<i32>, decompositions: &HashMap<i32, HashMap<i32, i32>>) -> HashMap<i32, i32> {
     let mut out: HashMap<i32, i32> = HashMap::new();
     for prime in primes {
