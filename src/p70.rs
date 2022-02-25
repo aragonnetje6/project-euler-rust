@@ -2,10 +2,13 @@ use crate::p69::get_all_phi_under;
 
 pub fn p70() {
     let phis = get_all_phi_under(10000000);
-    let permutation_phis: Vec<(i32, i32)> = phis.iter().filter(|(k, v)| { is_permutation(**k, **v) }).map(|(k, v)| {(*k, *v)}).collect();
-    for (k, v) in permutation_phis {
-        println!("{}, {}", k, v);
-    }
+    let (permutation_n, permutation_phi) = phis
+        .iter()
+        .filter(|(k, v)| { is_permutation(**k, **v) })
+        .map(|(k, v)| {(*k, *v)})
+        .min_by_key(|(n, phi)| {n / phi})
+        .expect("No value found");
+    println!("Minimum permutation totient: n={}, Phi(n)={}", permutation_n, permutation_phi);
 }
 
 fn is_permutation(x: i32, y: i32) -> bool {
