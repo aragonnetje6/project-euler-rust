@@ -136,7 +136,7 @@ pub fn get_all_phi_under(n: i32) -> HashMap<i32, i32> {
     return phis;
 }
 
-fn to_hashmap(arr: Vec<i32>) -> HashMap<i32, i32> {
+pub fn to_hashmap(arr: Vec<i32>) -> HashMap<i32, i32> {
     let mut out: HashMap<i32, i32> = HashMap::new();
     for item in arr {
         let count = out.entry(item).or_insert(0);
