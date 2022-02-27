@@ -4,12 +4,12 @@
 
 // use crate::p69::{p69};
 // use crate::p70::{p70};
-use crate::p71_72::{p71};
+use crate::p071_072::{p71};
 
-mod p69;
-mod p70;
+mod p069;
+mod p070;
 mod primes_and_phi;
-mod p71_72;
+mod p071_072;
 
 fn main() {
     // p69();
