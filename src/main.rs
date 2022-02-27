@@ -7,6 +7,7 @@ use crate::p70::{p70};
 
 mod p69;
 mod p70;
+mod primes_and_phi;
 
 fn main() {
     p69();
