@@ -41,7 +41,7 @@ fn is_reduced(frac: &Fraction) -> bool {
     return gcd(frac.n, frac.d) == 1;
 }
 
-pub fn p71() {
+pub fn p071() {
     const N: i32 = 1000000;
     const TARGET: Fraction = Fraction {n: 3, d: 7};
     // let primes = get_all_primes_under(N);

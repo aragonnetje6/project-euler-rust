@@ -1,7 +1,7 @@
 use std::time::Instant;
 use crate::primes_and_phi::get_all_phi_under;
 
-pub fn p70() {
+pub fn p070() {
     let before = Instant::now();
     let phis = get_all_phi_under(10_000_000);
     let (permutation_n, permutation_phi) = phis

@@ -13,7 +13,7 @@ fn get_max_phi_ratio_under(n: i32) -> (i32, f32) {
     return (max_n.clone(), max_ratio.clone());
 }
 
-pub fn p69() {
+pub fn p069() {
     let before = Instant::now();
     let (max_n, max_ratio) = get_max_phi_ratio_under(1000001);
     println!("Done! took {}s", before.elapsed().as_secs_f32());
