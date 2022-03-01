@@ -13,20 +13,25 @@ pub fn p096() {
         let solved: [[i32; 9]; 9];
         let before = Instant::now();
         match elimination_solve_sudoku(&sudoku) {
-            Ok(x) => { solved = x}
-            Err(err) => {panic!("{}", err)}
+            Ok(x) => solved = x,
+            Err(err) => {
+                panic!("{}", err)
+            }
         }
         let time = before.elapsed().as_millis();
-        total_time+=time;
+        total_time += time;
         println!("Took {}ms", time);
         for line in solved {
-            println!("{}", line.iter().fold("".to_string(), |acc, x| { format!("{} {}", acc, x) }))
+            println!(
+                "{}",
+                line.iter()
+                    .fold("".to_string(), |acc, x| { format!("{} {}", acc, x) })
+            )
         }
-        result += solved[0][0] * 100 + solved[0][1] * 10 +solved[0][2];
+        result += solved[0][0] * 100 + solved[0][1] * 10 + solved[0][2];
     }
     println!("Result: {}, took {}ms", result, total_time);
 }
-
 
 fn get_sudokus() -> String {
     let path = Path::new("src/p096_sudoku.txt");
@@ -54,8 +59,9 @@ fn process_file(str: String) -> Vec<[[i32; 9]; 9]> {
         let current_arr = out.last_mut().expect("just created");
         for (j, num) in line
             .chars()
-            .map(|x| { x.to_string().parse::<i32>().expect("all valid ints") })
-            .enumerate() {
+            .map(|x| x.to_string().parse::<i32>().expect("all valid ints"))
+            .enumerate()
+        {
             current_arr[i % 10 - 1][j] = num;
         }
     }
@@ -63,11 +69,14 @@ fn process_file(str: String) -> Vec<[[i32; 9]; 9]> {
 }
 
 fn elimination_solve_sudoku(sudoku: &[[i32; 9]; 9]) -> Result<[[i32; 9]; 9], &str> {
-    let mut options: [[HashSet<i32>; 9]; 9] = array::from_fn(|_| { array::from_fn(|_| { HashSet::new() }) });
+    let mut options: [[HashSet<i32>; 9]; 9] =
+        array::from_fn(|_| array::from_fn(|_| HashSet::new()));
     for (y, row) in sudoku.iter().enumerate() {
         for (x, entry) in row.iter().enumerate() {
             if *entry == 0 {
-                (1..10).for_each(|i| { options[y][x].insert(i); });
+                (1..10).for_each(|i| {
+                    options[y][x].insert(i);
+                });
             } else {
                 options[y][x].insert(*entry);
             }
@@ -82,27 +91,29 @@ fn elimination_solve_sudoku(sudoku: &[[i32; 9]; 9]) -> Result<[[i32; 9]; 9], &st
             }
         }
     }
-    let mut options_vec: [[Vec<i32>; 9]; 9] = array::from_fn(|_| { array::from_fn(|_| { Vec::new() }) });
+    let mut options_vec: [[Vec<i32>; 9]; 9] = array::from_fn(|_| array::from_fn(|_| Vec::new()));
     for (y, row) in options.iter().enumerate() {
         for (x, entry) in row.iter().enumerate() {
-            options_vec[y][x].append(&mut Vec::from_iter(entry.iter().map(|x| { *x })));
+            options_vec[y][x].append(&mut Vec::from_iter(entry.iter().map(|x| *x)));
         }
     }
-    let mut sudoku: [[i32; 9]; 9] =
-        array::from_fn(|y| {
-            array::from_fn(|x| {
-                if options_vec[y][x].len() == 1 {
-                    *options_vec[y][x].first().expect("exists")
-                } else {
-                    0
-                }
-            })
-        });
+    let mut sudoku: [[i32; 9]; 9] = array::from_fn(|y| {
+        array::from_fn(|x| {
+            if options_vec[y][x].len() == 1 {
+                *options_vec[y][x].first().expect("exists")
+            } else {
+                0
+            }
+        })
+    });
     let out = smart_backtrack_solve_sudoku(options_vec, sudoku);
     return out;
 }
 
-fn smart_backtrack_solve_sudoku(options_vec: [[Vec<i32>; 9]; 9], sudoku: [[i32; 9]; 9]) -> Result<[[i32; 9]; 9], &'static str> {
+fn smart_backtrack_solve_sudoku(
+    options_vec: [[Vec<i32>; 9]; 9],
+    sudoku: [[i32; 9]; 9],
+) -> Result<[[i32; 9]; 9], &'static str> {
     for (y, row) in sudoku.iter().enumerate() {
         for (x, entry) in row.iter().enumerate() {
             if *entry != 0 {
@@ -114,7 +125,9 @@ fn smart_backtrack_solve_sudoku(options_vec: [[Vec<i32>; 9]; 9], sudoku: [[i32; 
                 if valid(&newsudoku, x, y) {
                     match smart_backtrack_solve_sudoku(options_vec.clone(), newsudoku) {
                         Err(_) => {}
-                        Ok(x) => { return Result::Ok(x); }
+                        Ok(x) => {
+                            return Result::Ok(x);
+                        }
                     }
                 }
             }
@@ -124,13 +137,18 @@ fn smart_backtrack_solve_sudoku(options_vec: [[Vec<i32>; 9]; 9], sudoku: [[i32; 
     return Result::Ok(sudoku);
 }
 
-fn remove_from_options(options: &mut [[HashSet<i32>; 9]; 9], x: usize, y: usize, entry: &&HashSet<i32>) {
+fn remove_from_options(
+    options: &mut [[HashSet<i32>; 9]; 9],
+    x: usize,
+    y: usize,
+    entry: &&HashSet<i32>,
+) {
     for sub in 0..9 {
         if sub != x {
-            options[y][sub] = HashSet::from_iter(options[y][sub].difference(entry).map(|x| { *x }));
+            options[y][sub] = HashSet::from_iter(options[y][sub].difference(entry).map(|x| *x));
         }
         if sub != y {
-            options[sub][x] = HashSet::from_iter(options[sub][x].difference(entry).map(|x| { *x }));
+            options[sub][x] = HashSet::from_iter(options[sub][x].difference(entry).map(|x| *x));
         }
     }
     let x_offset = x / 3 * 3;
@@ -138,7 +156,8 @@ fn remove_from_options(options: &mut [[HashSet<i32>; 9]; 9], x: usize, y: usize,
     for x_sub in x_offset..x_offset + 3 {
         for y_sub in y_offset..y_offset + 3 {
             if (x_sub != x) | (y_sub != y) {
-                options[y_sub][x_sub] = HashSet::from_iter(options[y_sub][x_sub].difference(entry).map(|x| { *x }));
+                options[y_sub][x_sub] =
+                    HashSet::from_iter(options[y_sub][x_sub].difference(entry).map(|x| *x));
             }
         }
     }
@@ -165,15 +184,19 @@ fn backtrack_solve_sudoku(sudoku: &[[i32; 9]; 9]) -> bool {
 
 fn valid(sudoku: &[[i32; 9]; 9], x: usize, y: usize) -> bool {
     let mut count_arr = [0; 10];
-    sudoku[y].iter().for_each(|item| { count_arr[*item as usize] += 1 });
+    sudoku[y]
+        .iter()
+        .for_each(|item| count_arr[*item as usize] += 1);
     count_arr[0] = 0;
-    if count_arr.iter().any(|entry| { *entry > 1 }) {
+    if count_arr.iter().any(|entry| *entry > 1) {
         return false;
     }
     count_arr = [0; 10];
-    sudoku.iter().for_each(|item| { count_arr[item[x] as usize] += 1 });
+    sudoku
+        .iter()
+        .for_each(|item| count_arr[item[x] as usize] += 1);
     count_arr[0] = 0;
-    if count_arr.iter().any(|entry| { *entry > 1 }) {
+    if count_arr.iter().any(|entry| *entry > 1) {
         return false;
     }
     count_arr = [0; 10];
@@ -185,5 +208,5 @@ fn valid(sudoku: &[[i32; 9]; 9], x: usize, y: usize) -> bool {
         }
     }
     count_arr[0] = 0;
-    return !count_arr.iter().any(|entry| { *entry > 1 });
+    return !count_arr.iter().any(|entry| *entry > 1);
 }

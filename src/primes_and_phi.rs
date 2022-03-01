@@ -6,10 +6,12 @@ pub fn get_all_phi_under(n: i32) -> HashMap<i32, i32> {
     let mut phis: HashMap<i32, i32> = HashMap::new();
     phis.insert(1, 1);
     for (i, decomposition) in to_powers(get_all_factors_under(n, &primes, &primes_set)) {
-        phis.insert(i, decomposition.iter()
-            .fold(1,
-                  |acc, (prime, pow)|
-                      { acc * prime.pow((pow - 1) as u32) * (prime - 1) }));
+        phis.insert(
+            i,
+            decomposition.iter().fold(1, |acc, (prime, pow)| {
+                acc * prime.pow((pow - 1) as u32) * (prime - 1)
+            }),
+        );
     }
     return phis;
 }
@@ -36,7 +38,11 @@ fn entry_to_powers(val: Vec<i32>) -> HashMap<i32, i32> {
     return entry;
 }
 
-pub fn get_all_factors_under(n: i32, primes: &Vec<i32>, primes_set: &HashSet<i32>) -> HashMap<i32, Vec<i32>> {
+pub fn get_all_factors_under(
+    n: i32,
+    primes: &Vec<i32>,
+    primes_set: &HashSet<i32>,
+) -> HashMap<i32, Vec<i32>> {
     let mut factors: HashMap<i32, Vec<i32>> = HashMap::new();
     for i in 2..n {
         factors.insert(i, get_factors(i, &primes, &primes_set, &factors));
@@ -44,7 +50,12 @@ pub fn get_all_factors_under(n: i32, primes: &Vec<i32>, primes_set: &HashSet<i32
     return factors;
 }
 
-fn get_factors(n: i32, primes: &Vec<i32>, primes_set: &HashSet<i32>, factors: &HashMap<i32, Vec<i32>>) -> Vec<i32> {
+fn get_factors(
+    n: i32,
+    primes: &Vec<i32>,
+    primes_set: &HashSet<i32>,
+    factors: &HashMap<i32, Vec<i32>>,
+) -> Vec<i32> {
     if primes_set.contains(&n) {
         return vec![n];
     }

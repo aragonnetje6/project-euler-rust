@@ -11,14 +11,14 @@
 // use crate::p074::{p074};
 use crate::p075::p075;
 
-// mod p069;
-// mod p070;
-// mod primes_and_phi;
-// mod p071_072;
-// mod p074;
+mod p069;
+mod p070;
+mod p071_072;
+mod p074;
 mod p075;
-// mod p096;
-// mod p097;
+mod p096;
+mod p097;
+mod primes_and_phi;
 
 fn main() {
     // p069();
