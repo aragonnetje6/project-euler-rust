@@ -3,32 +3,35 @@
 #![feature(total_cmp)]
 #![feature(array_from_fn)]
 
-use crate::p067::p067;
-// use crate::p069::{p069};
-// use crate::p070::{p070};
-// use crate::p071_072::{p071};
-// use crate::p096::{p096};
-// use crate::p097::{p097};
-// use crate::p074::{p074};
-// use crate::p075::{p075};
+// use crate::p067::p067;
+// use crate::p069::p069;
+// use crate::p070::p070;
+// use crate::p071_072::p071;
+// use crate::p074::p074;
+// use crate::p075::p075;
 // use crate::p085::p085;
-use crate::p086::p086;
+// use crate::p086::p086;
+use crate::p087::p087;
 
+// use crate::p096::p096;
+// use crate::p097::p097;
+
+mod file_io;
+mod p067;
 mod p069;
 mod p070;
 mod p071_072;
 mod p074;
 mod p075;
+mod p085;
+mod p086;
+mod p087;
 mod p096;
 mod p097;
 mod primes_and_phi;
-mod p085;
-mod p086;
-mod p067;
-mod file_io;
 
 fn main() {
-    p067();
+    // p067();
     // p069();
     // p070();
     // p071();
@@ -36,6 +39,7 @@ fn main() {
     // p075();
     // p085();
     // p086();
+    p087();
     // p096();
     // p097();
 }
