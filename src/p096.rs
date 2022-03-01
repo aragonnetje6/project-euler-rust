@@ -1,12 +1,11 @@
 use std::array;
 use std::collections::HashSet;
-use std::fs::File;
-use std::io::Read;
-use std::path::Path;
 use std::time::Instant;
 
+use crate::file_io;
+
 pub fn p096() {
-    let sudokus = process_file(get_sudokus());
+    let sudokus = process_file(file_io::read_file("src/p096_sudoku.txt"));
     let mut result = 0;
     let mut total_time = 0;
     for sudoku in sudokus {
@@ -31,22 +30,6 @@ pub fn p096() {
         result += solved[0][0] * 100 + solved[0][1] * 10 + solved[0][2];
     }
     println!("Result: {}, took {}ms", result, total_time);
-}
-
-fn get_sudokus() -> String {
-    let path = Path::new("src/p096_sudoku.txt");
-    let display = path.display();
-    let mut file = match File::open(&path) {
-        Err(why) => panic!("couldn't open {}: {}", display, why),
-        Ok(file) => file,
-    };
-
-    let mut s = String::new();
-    match file.read_to_string(&mut s) {
-        Err(why) => panic!("couldn't read {}: {}", display, why),
-        Ok(_) => {}
-    }
-    return s;
 }
 
 fn process_file(str: String) -> Vec<[[i32; 9]; 9]> {

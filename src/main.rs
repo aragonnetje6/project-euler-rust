@@ -3,6 +3,7 @@
 #![feature(total_cmp)]
 #![feature(array_from_fn)]
 
+use crate::p067::p067;
 // use crate::p069::{p069};
 // use crate::p070::{p070};
 // use crate::p071_072::{p071};
@@ -23,15 +24,18 @@ mod p097;
 mod primes_and_phi;
 mod p085;
 mod p086;
+mod p067;
+mod file_io;
 
 fn main() {
+    p067();
     // p069();
     // p070();
     // p071();
     // p074();
     // p075();
     // p085();
-    p086();
+    // p086();
     // p096();
     // p097();
 }
