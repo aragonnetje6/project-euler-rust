@@ -10,7 +10,8 @@
 // use crate::p097::{p097};
 // use crate::p074::{p074};
 // use crate::p075::{p075};
-use crate::p085::p085;
+// use crate::p085::p085;
+use crate::p086::p086;
 
 mod p069;
 mod p070;
@@ -21,6 +22,7 @@ mod p096;
 mod p097;
 mod primes_and_phi;
 mod p085;
+mod p086;
 
 fn main() {
     // p069();
@@ -28,7 +30,8 @@ fn main() {
     // p071();
     // p074();
     // p075();
-    p085();
+    // p085();
+    p086();
     // p096();
     // p097();
 }
