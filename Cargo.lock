@@ -82,7 +82,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "rust-test"
+name = "project-euler-rust"
 version = "0.1.0"
 dependencies = [
  "mod_exp",
