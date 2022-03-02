@@ -80,7 +80,7 @@ fn elimination_solve_sudoku(sudoku: &[[i32; 9]; 9]) -> Result<[[i32; 9]; 9], &st
             options_vec[y][x].append(&mut Vec::from_iter(entry.iter().map(|x| *x)));
         }
     }
-    let mut sudoku: [[i32; 9]; 9] = array::from_fn(|y| {
+    let sudoku: [[i32; 9]; 9] = array::from_fn(|y| {
         array::from_fn(|x| {
             if options_vec[y][x].len() == 1 {
                 *options_vec[y][x].first().expect("exists")

@@ -1,9 +1,3 @@
-use std::collections::{HashMap, HashSet};
-
-use crate::primes_and_phi::{
-    get_all_factors_under, get_all_phi_under, get_all_primes_under, to_powers,
-};
-
 #[derive(PartialEq, Eq, Hash, Clone, Copy, Debug)]
 struct Fraction {
     n: i32,

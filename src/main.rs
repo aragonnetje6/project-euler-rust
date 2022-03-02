@@ -2,6 +2,7 @@
 #![feature(int_roundings)]
 #![feature(total_cmp)]
 #![feature(array_from_fn)]
+#![allow(dead_code)]
 
 // use crate::p067::p067;
 // use crate::p069::p069;
@@ -11,8 +12,9 @@
 // use crate::p075::p075;
 // use crate::p085::p085;
 // use crate::p086::p086;
-use crate::p087::p087;
-use crate::p092::p092;
+// use crate::p087::p087;
+// use crate::p092::p092;
+use crate::p094::p094;
 
 // use crate::p096::p096;
 // use crate::p097::p097;
@@ -31,6 +33,7 @@ mod p092;
 mod p096;
 mod p097;
 mod primes_and_phi;
+mod p094;
 
 fn main() {
     // p067();
@@ -42,7 +45,8 @@ fn main() {
     // p085();
     // p086();
     // p087();
-    p092();
+    // p092();
+    p094();
     // p096();
     // p097();
 }
