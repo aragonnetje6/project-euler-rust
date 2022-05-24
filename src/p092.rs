@@ -32,7 +32,9 @@ fn get_digit_chain_end_smart(n: u32, ends: &Vec<u32>) -> u32 {
         i = digit_square(i);
         match ends.get(i as usize) {
             None => {}
-            Some(x) => { return *x; }
+            Some(x) => {
+                return *x;
+            }
         }
     }
     return i;

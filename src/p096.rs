@@ -32,6 +32,30 @@ pub fn p096() {
     println!("Result: {}, took {}ms", result, total_time);
 }
 
+pub fn solve_one() {
+    let sudoku: [[i32; 9]; 9] = [
+        [0, 0, 6, 7, 0, 0, 0, 8, 5],
+        [0, 8, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [3, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ];
+    let now = Instant::now();
+    match elimination_solve_sudoku(&sudoku) {
+        Ok(x) => {
+            println!("sudoku solved in {} ms", now.elapsed().as_millis());
+            for line in x {
+                println!("{}", line.map(|x| { x.to_string() }).join(" "))
+            }
+        }
+        Err(err) => panic!("{}", err),
+    }
+}
+
 fn process_file(str: String) -> Vec<[[i32; 9]; 9]> {
     let mut out: Vec<[[i32; 9]; 9]> = Vec::new();
     for (i, line) in str.split("\n").enumerate() {
@@ -109,15 +133,15 @@ fn smart_backtrack_solve_sudoku(
                     match smart_backtrack_solve_sudoku(options_vec.clone(), newsudoku) {
                         Err(_) => {}
                         Ok(x) => {
-                            return Result::Ok(x);
+                            return Ok(x);
                         }
                     }
                 }
             }
-            return Result::Err("No valid entry");
+            return Err("No valid entry");
         }
     }
-    return Result::Ok(sudoku);
+    return Ok(sudoku);
 }
 
 fn remove_from_options(
