@@ -26,9 +26,9 @@ pub fn p070() {
 fn is_permutation(x: i32, y: i32) -> bool {
     unsafe {
         let mut sorted_x = x.to_string().as_mut_vec().clone();
-        sorted_x.sort();
+        sorted_x.sort_unstable();
         let mut sorted_y = y.to_string().as_mut_vec().clone();
-        sorted_y.sort();
-        return sorted_x == sorted_y;
+        sorted_y.sort_unstable();
+        sorted_x == sorted_y
     }
 }

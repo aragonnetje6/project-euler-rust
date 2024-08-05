@@ -10,14 +10,14 @@ pub fn p067() {
 
 fn process_triangle(str: String) -> Vec<Vec<i32>> {
     let mut out: Vec<Vec<i32>> = Vec::new();
-    for line in str.split("\n").filter(|x| x.len() > 0) {
+    for line in str.split('\n').filter(|x| !x.is_empty()) {
         out.push(
-            line.split(" ")
+            line.split(' ')
                 .map(|x| x.parse().expect("fucking parse failure"))
                 .collect(),
         );
     }
-    return out;
+    out
 }
 
 fn calculate_max_path(triangle: &Vec<Vec<i32>>) -> i32 {

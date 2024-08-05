@@ -13,7 +13,7 @@ pub fn get_all_phi_under(n: i32) -> HashMap<i32, i32> {
             }),
         );
     }
-    return phis;
+    phis
 }
 
 pub fn to_powers(factors: HashMap<i32, Vec<i32>>) -> HashMap<i32, HashMap<i32, i32>> {
@@ -21,7 +21,7 @@ pub fn to_powers(factors: HashMap<i32, Vec<i32>>) -> HashMap<i32, HashMap<i32, i
     for (key, val) in factors {
         out.insert(key, entry_to_powers(val));
     }
-    return out;
+    out
 }
 
 fn entry_to_powers(val: Vec<i32>) -> HashMap<i32, i32> {
@@ -35,7 +35,7 @@ fn entry_to_powers(val: Vec<i32>) -> HashMap<i32, i32> {
             }
         }
     }
-    return entry;
+    entry
 }
 
 pub fn get_all_factors_under(
@@ -45,9 +45,9 @@ pub fn get_all_factors_under(
 ) -> HashMap<i32, Vec<i32>> {
     let mut factors: HashMap<i32, Vec<i32>> = HashMap::new();
     for i in 2..n {
-        factors.insert(i, get_factors(i, &primes, &primes_set, &factors));
+        factors.insert(i, get_factors(i, primes, primes_set, &factors));
     }
-    return factors;
+    factors
 }
 
 fn get_factors(
@@ -77,7 +77,7 @@ pub fn get_all_primes_under(max: i32) -> Vec<i32> {
             out.push(i);
         }
     }
-    return out;
+    out
 }
 
 fn is_prime(n: i32, primes: &Vec<i32>) -> bool {
@@ -89,5 +89,5 @@ fn is_prime(n: i32, primes: &Vec<i32>) -> bool {
             return false;
         }
     }
-    return true;
+    true
 }

@@ -14,15 +14,13 @@ fn has_integer_area(twosides: i128, oneside: i128) -> bool {
             return false;
         }
     }
-    return false;
+    false
 }
 
 fn get_integer_almost_equi_triangle_perimeters_from(length: i128) -> Vec<i128> {
     let mut out = Vec::with_capacity(3);
-    if length > 1 {
-        if has_integer_area(length, length - 1) {
-            out.push(get_perimeter(length, length - 1));
-        }
+    if length > 1 && has_integer_area(length, length - 1) {
+        out.push(get_perimeter(length, length - 1));
     }
     if has_integer_area(length, length) {
         out.push(get_perimeter(length, length));
@@ -30,7 +28,7 @@ fn get_integer_almost_equi_triangle_perimeters_from(length: i128) -> Vec<i128> {
     if has_integer_area(length, length + 1) {
         out.push(get_perimeter(length, length + 1));
     }
-    return out;
+    out
 }
 
 fn get_sum_of_all_integer_triangle_perimeters_under(n: i128) -> i128 {
@@ -39,15 +37,15 @@ fn get_sum_of_all_integer_triangle_perimeters_under(n: i128) -> i128 {
         let triangles = get_integer_almost_equi_triangle_perimeters_from(length);
         for perimeter in triangles {
             if perimeter <= n {
-                total += perimeter as i128;
-                println!("perimeter: {}, total: {}", perimeter, total);
+                total += perimeter;
+                println!("perimeter: {perimeter}, total: {total}");
             }
         }
         if length % 10_000_000 == 0 {
-            println!("currently at length {}, total: {}", length, total);
+            println!("currently at length {length}, total: {total}");
         }
     }
-    return total;
+    total
 }
 
 fn get_perimeter(two_sides: i128, one_side: i128) -> i128 {

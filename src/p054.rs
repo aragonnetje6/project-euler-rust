@@ -4,9 +4,9 @@ use crate::file_io;
 
 pub fn p054() {
     let mut total = 0;
-    for line in file_io::read_file("src/p054_poker.txt").split("\n") {
-        let (mut hand1, mut hand2) = decode_hands(&line);
-        println!("{}", line);
+    for line in file_io::read_file("src/p054_poker.txt").split('\n') {
+        let (mut hand1, mut hand2) = decode_hands(line);
+        println!("{line}");
         hand1.sort_by_key(|x| -(x.value as i8));
         hand2.sort_by_key(|x| -(x.value as i8));
         assert_eq!(hand1.len(), 5);
@@ -16,47 +16,41 @@ pub fn p054() {
         if rank1 > rank2 {
             total += 1;
             println!(
-                "Won with rank1: {}, val1: {}, rank2: {}, val2: {}",
-                rank1, val1, rank2, val2
+                "Won with rank1: {rank1}, val1: {val1}, rank2: {rank2}, val2: {val2}"
             );
         } else if rank1 == rank2 {
             if val1 > val2 {
                 total += 1;
                 println!(
-                    "Won with rank1: {}, val1: {}, rank2: {}, val2: {}",
-                    rank1, val1, rank2, val2
+                    "Won with rank1: {rank1}, val1: {val1}, rank2: {rank2}, val2: {val2}"
                 );
             } else if val1 == val2 {
                 for (highest1, highest2) in zip(&hand1, &hand2) {
                     if highest1.value > highest2.value {
                         total += 1;
                         println!(
-                            "Won with rank1: {}, val1: {}, rank2: {}, val2: {}",
-                            rank1, val1, rank2, val2
+                            "Won with rank1: {rank1}, val1: {val1}, rank2: {rank2}, val2: {val2}"
                         );
                         break;
                     } else if highest1.value < highest2.value {
                         println!(
-                            "Lost with rank1: {}, val1: {}, rank2: {}, val2: {}",
-                            rank1, val1, rank2, val2
+                            "Lost with rank1: {rank1}, val1: {val1}, rank2: {rank2}, val2: {val2}"
                         );
                         break;
                     }
                 }
             } else {
                 println!(
-                    "Lost with rank1: {}, val1: {}, rank2: {}, val2: {}",
-                    rank1, val1, rank2, val2
+                    "Lost with rank1: {rank1}, val1: {val1}, rank2: {rank2}, val2: {val2}"
                 );
             }
         } else {
             println!(
-                "Lost with rank1: {}, val1: {}, rank2: {}, val2: {}",
-                rank1, val1, rank2, val2
+                "Lost with rank1: {rank1}, val1: {val1}, rank2: {rank2}, val2: {val2}"
             );
         }
     }
-    println!("Total wins by p1: {}", total);
+    println!("Total wins by p1: {total}");
 }
 
 fn rank_hand(hand: &[Card]) -> (i32, i32) {
@@ -66,7 +60,7 @@ fn rank_hand(hand: &[Card]) -> (i32, i32) {
     if same_suit(hand)
         && hand_values
         .iter()
-        .all(|x| [10, 11, 12, 13, 14].contains(&x))
+        .all(|x| [10, 11, 12, 13, 14].contains(x))
     {
         return (9, max_value);
     }
@@ -106,11 +100,10 @@ fn rank_hand(hand: &[Card]) -> (i32, i32) {
     let (_, third_two) = last_three.split_last().unwrap();
     let pairs: Vec<&[Card]> = [first_two, second_two, third_two, last_two]
         .iter()
-        .filter(|x| same_value(x))
-        .map(|x| *x)
+        .filter(|x| same_value(x)).copied()
         .collect();
     println!("{:?}", [first_two, second_two, third_two, last_two]);
-    println!("{:?}", pairs);
+    println!("{pairs:?}");
     if pairs.len() == 2 {
         return (
             2,
@@ -131,7 +124,7 @@ fn rank_hand(hand: &[Card]) -> (i32, i32) {
     if pairs.len() == 1 {
         return (1, pairs.first().unwrap().first().unwrap().value);
     }
-    return (0, max_value);
+    (0, max_value)
 }
 
 fn is_consecutive(hand_values: &[i32]) -> bool {
@@ -154,7 +147,7 @@ fn same_value(cards: &[Card]) -> bool {
 fn decode_hands(line: &str) -> (Vec<Card>, Vec<Card>) {
     let cards: Vec<Card> = line.split(' ').map(Card::from_code).collect();
     let (h1, h2) = cards.split_at(5);
-    return (Vec::from(h1), Vec::from(h2));
+    (Vec::from(h1), Vec::from(h2))
 }
 
 #[derive(Clone, Debug)]

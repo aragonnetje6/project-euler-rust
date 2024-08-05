@@ -27,5 +27,5 @@ fn get_all_triplets_under(n: i32, primes: &Vec<i32>) -> HashSet<i32> {
             }
         }
     }
-    return triplets;
+    triplets
 }

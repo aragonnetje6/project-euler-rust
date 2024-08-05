@@ -5,12 +5,12 @@ pub fn p075() {
             total += 1;
         }
     }
-    println!("total: {}", total);
+    println!("total: {total}");
 }
 
 fn has_one_triangle(l: u32) -> bool {
     let mut found_one = false;
-    for h in 1..l / 3 + 1 {
+    for h in 1..=(l / 3) {
         for w in h..l {
             let d = l - h - w;
             if (w > l / 2) | (h + w > 2 * l / 3) | (d < w) {
@@ -28,5 +28,5 @@ fn has_one_triangle(l: u32) -> bool {
             }
         }
     }
-    return found_one;
+    found_one
 }

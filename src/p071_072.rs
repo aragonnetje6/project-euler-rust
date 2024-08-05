@@ -7,22 +7,22 @@ struct Fraction {
 impl Fraction {
     fn reduce(&self) -> Fraction {
         let div = gcd(self.n, self.d);
-        return Fraction {
+        Fraction {
             n: self.n / div,
             d: self.d / div,
-        };
+        }
     }
 
     fn gcd(&self) -> i32 {
-        return gcd(self.n, self.d);
+        gcd(self.n, self.d)
     }
 
     fn is_reduced(&self) -> bool {
-        return is_reduced(self);
+        is_reduced(self)
     }
 
     fn eval(&self) -> f32 {
-        return self.n as f32 / self.d as f32;
+        self.n as f32 / self.d as f32
     }
 }
 
@@ -34,15 +34,15 @@ fn gcd(x: i32, y: i32) -> i32 {
         b = a % b;
         a = t;
     }
-    return a;
+    a
 }
 
 fn is_reduced(frac: &Fraction) -> bool {
-    return gcd(frac.n, frac.d) == 1;
+    gcd(frac.n, frac.d) == 1
 }
 
 pub fn p071() {
-    const N: i32 = 1000000;
+    const N: i32 = 1_000_000;
     const TARGET: Fraction = Fraction { n: 3, d: 7 };
     let fractions = get_close_fractions_under(TARGET, N);
     for frac in fractions
@@ -63,12 +63,12 @@ fn get_fractions_nominator_under(n: i32) -> Vec<Fraction> {
             }
         }
     }
-    return out;
+    out
 }
 
 fn get_close_fractions_under(frac: Fraction, d_max: i32) -> Vec<Fraction> {
     let mut out: Vec<Fraction> = Vec::new();
-    let mut other_frac = frac.clone();
+    let mut other_frac = frac;
     while other_frac.d < d_max {
         other_frac.d += 1;
         other_frac.n += 1;
@@ -76,8 +76,8 @@ fn get_close_fractions_under(frac: Fraction, d_max: i32) -> Vec<Fraction> {
             other_frac.n -= 1;
         }
         if other_frac.is_reduced() {
-            out.push(other_frac.clone());
+            out.push(other_frac);
         }
     }
-    return out;
+    out
 }
