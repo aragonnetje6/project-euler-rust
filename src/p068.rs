@@ -1,7 +1,4 @@
-#![feature(iter_map_windows, iter_collect_into)]
-#![warn(clippy::pedantic)]
-
-fn main() {
+pub fn p068() {
     let result_3 = find_max_n_gon_string::<6>();
     println!("max string for 3-gon: {result_3:?}");
     let result_4 = find_max_n_gon_string::<8>();
