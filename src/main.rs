@@ -1,4 +1,3 @@
-#![feature(is_sorted)]
 #![feature(int_roundings)]
 #![allow(dead_code)]
 
@@ -7,6 +6,7 @@ extern crate core;
 use crate::p054::p054;
 
 // use crate::p067::p067;
+// use crate::p068::p068;
 // use crate::p069::p069;
 // use crate::p070::p070;
 // use crate::p071_072::p071;
@@ -23,6 +23,7 @@ use crate::p054::p054;
 mod file_io;
 mod p054;
 mod p067;
+mod p068;
 mod p069;
 mod p070;
 mod p071_072;
@@ -40,6 +41,7 @@ mod primes_and_phi;
 fn main() {
     p054();
     // p067();
+    // p068();
     // p069();
     // p070();
     // p071();
