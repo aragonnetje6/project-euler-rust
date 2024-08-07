@@ -18,7 +18,7 @@ use crate::p086::p086;
 use crate::p087::p087;
 use crate::p092::p092;
 use crate::p094::p094;
-use crate::p096::{p096, solve_one};
+use crate::p096::p096;
 use crate::p097::p097;
 
 mod file_io;
@@ -41,20 +41,18 @@ mod primes_and_phi;
 
 fn main() {
     println!("p054: {}", p054());
-    println!("p054: {}", p067());
-    println!("p054: {}", p068());
-    println!("p054: {}", p069());
-    println!("p054: {}", p070());
-    println!("p054: {}", p071());
-    println!("p054: {}", p074());
-    println!("p054: {}", p075());
-    println!("p054: {}", p085());
-    println!("p054: {}", p086());
-    println!("p054: {}", p087());
-    println!("p054: {}", p092());
-    println!("p054: {}", p094());
-    println!("p054: {}", p096());
-    println!("p054: {}", p097());
-
-    solve_one();
+    println!("p067: {}", p067());
+    println!("p068: {}", p068());
+    println!("p069: {}", p069());
+    println!("p070: {}", p070());
+    println!("p071: {}", p071());
+    println!("p074: {}", p074());
+    println!("p075: {}", p075());
+    println!("p085: {}", p085());
+    println!("p086: {}", p086());
+    println!("p087: {}", p087());
+    println!("p092: {}", p092());
+    println!("p094: {}", p094());
+    println!("p096: {}", p096());
+    println!("p097: {}", p097());
 }

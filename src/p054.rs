@@ -76,8 +76,6 @@ fn rank_hand(hand: &[Card]) -> (i32, i32) {
         .filter(|x| same_value(x))
         .copied()
         .collect();
-    println!("{:?}", [first_two, second_two, third_two, last_two]);
-    println!("{pairs:?}");
     if pairs.len() == 2 {
         return (
             2,
