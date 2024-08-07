@@ -1,8 +1,5 @@
-pub fn p094() {
-    println!(
-        "{}",
-        get_sum_of_all_integer_triangle_perimeters_under(1_000_000_000)
-    );
+pub fn p094() -> i128 {
+    get_sum_of_all_integer_triangle_perimeters_under(1_000_000_000)
 }
 
 fn has_integer_area(twosides: i128, oneside: i128) -> bool {

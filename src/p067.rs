@@ -2,10 +2,10 @@ use std::cmp::max;
 
 use crate::file_io::read_file;
 
-pub fn p067() {
+pub fn p067() -> i32 {
     let mut triangle = process_triangle(read_file("src/p067_triangle.txt"));
     triangle.reverse();
-    println!("max path: {}", calculate_max_path(&triangle));
+    calculate_max_path(&triangle)
 }
 
 fn process_triangle(str: String) -> Vec<Vec<i32>> {

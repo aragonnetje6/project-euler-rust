@@ -1,7 +1,13 @@
 #[derive(PartialEq, Eq, Hash, Clone, Copy, Debug)]
-struct Fraction {
+pub struct Fraction {
     n: i32,
     d: i32,
+}
+
+impl std::fmt::Display for Fraction {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}/{}", self.n, self.d)
+    }
 }
 
 impl Fraction {
@@ -41,16 +47,14 @@ fn is_reduced(frac: &Fraction) -> bool {
     gcd(frac.n, frac.d) == 1
 }
 
-pub fn p071() {
+pub fn p071() -> Fraction {
     const N: i32 = 1_000_000;
     const TARGET: Fraction = Fraction { n: 3, d: 7 };
     let fractions = get_close_fractions_under(TARGET, N);
-    for frac in fractions
-        .iter()
+    fractions
+        .into_iter()
         .max_by(|frac1, frac2| frac1.eval().total_cmp(&frac2.eval()))
-    {
-        println!("{}", format!("{:?}", frac));
-    }
+        .unwrap()
 }
 
 fn get_fractions_nominator_under(n: i32) -> Vec<Fraction> {

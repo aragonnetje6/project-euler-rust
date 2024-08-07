@@ -1,4 +1,4 @@
-pub fn p074() {
+pub fn p074() -> i32 {
     let mut total = 0;
     for i in 0..1_000_000 {
         let chain = get_chain(i);
@@ -7,7 +7,7 @@ pub fn p074() {
             total += 1;
         }
     }
-    println!("Total 60-chains: {total}");
+    total
 }
 
 fn factorial(x: u32) -> u32 {

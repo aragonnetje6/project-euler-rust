@@ -1,6 +1,6 @@
-pub fn p092() {
+pub fn p092() -> usize {
     let all_ends = get_all_digit_chain_ends_under(10_000_000);
-    println!("{}", all_ends.iter().filter(|x| { **x == 89 }).count());
+    all_ends.iter().filter(|x| **x == 89).count()
 }
 
 fn digit_square(x: u32) -> u32 {

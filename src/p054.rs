@@ -2,66 +2,39 @@ use std::iter::zip;
 
 use crate::file_io;
 
-pub fn p054() {
+pub fn p054() -> i32 {
     let mut total = 0;
     for line in file_io::read_file("src/p054_poker.txt").split('\n') {
         let (mut hand1, mut hand2) = decode_hands(line);
-        println!("{line}");
         hand1.sort_by_key(|x| -(x.value as i8));
         hand2.sort_by_key(|x| -(x.value as i8));
-        assert_eq!(hand1.len(), 5);
-        assert_eq!(hand2.len(), 5);
         let (rank1, val1) = rank_hand(&hand1);
         let (rank2, val2) = rank_hand(&hand2);
         if rank1 > rank2 {
             total += 1;
-            println!(
-                "Won with rank1: {rank1}, val1: {val1}, rank2: {rank2}, val2: {val2}"
-            );
         } else if rank1 == rank2 {
             if val1 > val2 {
                 total += 1;
-                println!(
-                    "Won with rank1: {rank1}, val1: {val1}, rank2: {rank2}, val2: {val2}"
-                );
             } else if val1 == val2 {
                 for (highest1, highest2) in zip(&hand1, &hand2) {
                     if highest1.value > highest2.value {
                         total += 1;
-                        println!(
-                            "Won with rank1: {rank1}, val1: {val1}, rank2: {rank2}, val2: {val2}"
-                        );
                         break;
                     } else if highest1.value < highest2.value {
-                        println!(
-                            "Lost with rank1: {rank1}, val1: {val1}, rank2: {rank2}, val2: {val2}"
-                        );
                         break;
                     }
                 }
-            } else {
-                println!(
-                    "Lost with rank1: {rank1}, val1: {val1}, rank2: {rank2}, val2: {val2}"
-                );
             }
-        } else {
-            println!(
-                "Lost with rank1: {rank1}, val1: {val1}, rank2: {rank2}, val2: {val2}"
-            );
         }
     }
-    println!("Total wins by p1: {total}");
+    total
 }
 
 fn rank_hand(hand: &[Card]) -> (i32, i32) {
     let hand_values: Vec<i32> = hand.iter().map(Card::get_value).collect();
     let max_value = *hand_values.iter().max().unwrap();
     // Royal Flush
-    if same_suit(hand)
-        && hand_values
-        .iter()
-        .all(|x| [10, 11, 12, 13, 14].contains(x))
-    {
+    if same_suit(hand) && hand_values.iter().all(|x| [10, 11, 12, 13, 14].contains(x)) {
         return (9, max_value);
     }
     // Straight Flush
@@ -100,7 +73,8 @@ fn rank_hand(hand: &[Card]) -> (i32, i32) {
     let (_, third_two) = last_three.split_last().unwrap();
     let pairs: Vec<&[Card]> = [first_two, second_two, third_two, last_two]
         .iter()
-        .filter(|x| same_value(x)).copied()
+        .filter(|x| same_value(x))
+        .copied()
         .collect();
     println!("{:?}", [first_two, second_two, third_two, last_two]);
     println!("{pairs:?}");
@@ -114,10 +88,10 @@ fn rank_hand(hand: &[Card]) -> (i32, i32) {
                 .unwrap()
                 * 20
                 + pairs
-                .iter()
-                .map(|x| x.first().unwrap().value)
-                .min()
-                .unwrap(),
+                    .iter()
+                    .map(|x| x.first().unwrap().value)
+                    .min()
+                    .unwrap(),
         );
     }
     // One Pair

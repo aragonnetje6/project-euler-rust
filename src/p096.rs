@@ -4,7 +4,7 @@ use std::time::Instant;
 
 use crate::file_io;
 
-pub fn p096() {
+pub fn p096() -> i32 {
     let sudokus = process_file(file_io::read_file("src/p096_sudoku.txt"));
     let mut result = 0;
     let mut total_time = 0;
@@ -30,6 +30,7 @@ pub fn p096() {
         result += solved[0][0] * 100 + solved[0][1] * 10 + solved[0][2];
     }
     println!("Result: {result}, took {total_time}ms");
+    result
 }
 
 pub fn solve_one() {
@@ -113,7 +114,7 @@ fn elimination_solve_sudoku(sudoku: &[[i32; 9]; 9]) -> Result<[[i32; 9]; 9], &st
             }
         })
     });
-    
+
     smart_backtrack_solve_sudoku(options_vec, sudoku)
 }
 

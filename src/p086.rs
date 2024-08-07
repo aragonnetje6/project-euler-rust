@@ -1,9 +1,10 @@
 use std::cmp::min;
 
-pub fn p086() {
-    let result = get_least_m_with_more_than_n_integer_paths(1_000_000);
-    println!("m needed: {result}");
-    println!("gives {} paths", get_nr_of_integer_paths_under(result));
+pub fn p086() -> i32 {
+    
+    // println!("m needed: {result}");
+    // println!("gives {} paths", get_nr_of_integer_paths_under(result));
+    get_least_m_with_more_than_n_integer_paths(1_000_000)
 }
 
 fn get_shortest_path(w: i32, d: i32, h: i32) -> f32 {

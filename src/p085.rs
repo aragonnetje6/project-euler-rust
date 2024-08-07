@@ -1,11 +1,12 @@
-pub fn p085() {
+pub fn p085() -> u32 {
     let mut answers = get_all_areas(100);
     answers.sort_by_cached_key(|(_w, _h, n, _a)| n.abs_diff(2_000_000));
-    println!(
-        "n: {}, a: {}",
-        answers.first().expect("error").2,
-        answers.first().expect("error").3
-    );
+    // println!(
+    //     "n: {}, a: {}",
+    //     answers.first().unwrap().2,
+    //     answers.first().unwrap().3
+    // );
+    answers.first().unwrap().3
 }
 
 fn get_rects_for(width: u32, height: u32) -> u32 {

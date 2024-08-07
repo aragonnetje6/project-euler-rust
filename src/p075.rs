@@ -1,11 +1,11 @@
-pub fn p075() {
+pub fn p075() -> i32 {
     let mut total = 1;
     for i in 1..10000 {
         if has_one_triangle(i) {
             total += 1;
         }
     }
-    println!("total: {total}");
+    total
 }
 
 fn has_one_triangle(l: u32) -> bool {

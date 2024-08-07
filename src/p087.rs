@@ -2,10 +2,10 @@ use std::collections::HashSet;
 
 use crate::primes_and_phi::get_all_primes_under;
 
-pub fn p087() {
+pub fn p087() -> usize {
     let primes = get_all_primes_under(7072);
     let triples = get_all_triplets_under(50_000_000, &primes);
-    println!("{} triplets found", triples.len());
+    triples.len()
 }
 
 fn get_all_triplets_under(n: i32, primes: &Vec<i32>) -> HashSet<i32> {

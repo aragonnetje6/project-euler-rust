@@ -40,21 +40,21 @@ mod p097;
 mod primes_and_phi;
 
 fn main() {
-    p054();
-    p067();
-    p068();
-    p069();
-    p070();
-    p071();
-    p074();
-    p075();
-    p085();
-    p086();
-    p087();
-    p092();
-    p094();
-    p096();
-    p097();
+    println!("p054: {}", p054());
+    println!("p054: {}", p067());
+    println!("p054: {}", p068());
+    println!("p054: {}", p069());
+    println!("p054: {}", p070());
+    println!("p054: {}", p071());
+    println!("p054: {}", p074());
+    println!("p054: {}", p075());
+    println!("p054: {}", p085());
+    println!("p054: {}", p086());
+    println!("p054: {}", p087());
+    println!("p054: {}", p092());
+    println!("p054: {}", p094());
+    println!("p054: {}", p096());
+    println!("p054: {}", p097());
 
     solve_one();
 }

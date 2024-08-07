@@ -2,7 +2,7 @@ use std::time::Instant;
 
 use crate::primes_and_phi::get_all_phi_under;
 
-pub fn p070() {
+pub fn p070() -> i32 {
     let before = Instant::now();
     let phis = get_all_phi_under(10_000_000);
     let (permutation_n, permutation_phi) = phis
@@ -21,14 +21,13 @@ pub fn p070() {
         permutation_phi,
         (permutation_n as f32) / (permutation_phi as f32)
     );
+    permutation_n
 }
 
 fn is_permutation(x: i32, y: i32) -> bool {
-    unsafe {
-        let mut sorted_x = x.to_string().as_mut_vec().clone();
-        sorted_x.sort_unstable();
-        let mut sorted_y = y.to_string().as_mut_vec().clone();
-        sorted_y.sort_unstable();
-        sorted_x == sorted_y
-    }
+    let mut sorted_x: Vec<char> = x.to_string().chars().collect();
+    sorted_x.sort_unstable();
+    let mut sorted_y: Vec<char> = y.to_string().chars().collect();
+    sorted_y.sort_unstable();
+    sorted_x == sorted_y
 }

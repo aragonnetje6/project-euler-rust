@@ -1,14 +1,5 @@
-pub fn p068() {
-    let result_3 = find_max_n_gon_string::<6>();
-    println!("max string for 3-gon: {result_3:?}");
-    let result_4 = find_max_n_gon_string::<8>();
-    println!("max string for 4-gon: {result_4:?}");
-    let result_5 = find_max_n_gon_string::<10>();
-    println!("max string for 5-gon: {result_5:?}");
-    let result_6 = find_max_n_gon_string::<12>();
-    println!("max string for 6-gon: {result_6:?}");
-    let result_7 = find_max_n_gon_string::<14>();
-    println!("max string for 7-gon: {result_7:?}");
+pub fn p068() -> u128 {
+    find_max_n_gon_string::<10>().unwrap()
 }
 
 fn find_max_n_gon_string<const N: usize>() -> Option<u128> {
