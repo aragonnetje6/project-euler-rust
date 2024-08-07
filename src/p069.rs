@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-use std::time::Instant;
 
 use crate::primes_and_phi::get_all_phi_under;
 
@@ -22,9 +21,6 @@ fn get_max_phi_ratio_under(n: i32) -> (i32, f32) {
 }
 
 pub fn p069() -> i32 {
-    // let before = Instant::now();
-    let (max_n, max_ratio) = get_max_phi_ratio_under(1_000_001);
-    // println!("Done! took {}s", before.elapsed().as_secs_f32());
-    // println!("N={max_n}, ratio={max_ratio}");
+    let (max_n, _) = get_max_phi_ratio_under(1_000_001);
     max_n
 }

@@ -1,35 +1,15 @@
 use std::array;
 use std::collections::HashSet;
-use std::time::Instant;
 
 use crate::file_io;
 
 pub fn p096() -> i32 {
     let sudokus = process_file(file_io::read_file("src/p096_sudoku.txt"));
     let mut result = 0;
-    let mut total_time = 0;
     for sudoku in sudokus {
-        let solved: [[i32; 9]; 9];
-        let before = Instant::now();
-        match elimination_solve_sudoku(&sudoku) {
-            Ok(x) => solved = x,
-            Err(err) => {
-                panic!("{}", err)
-            }
-        }
-        let time = before.elapsed().as_millis();
-        total_time += time;
-        println!("Took {time}ms");
-        for line in solved {
-            println!(
-                "{}",
-                line.iter()
-                    .fold(String::new(), |acc, x| { format!("{acc} {x}") })
-            );
-        }
+        let solved: [[i32; 9]; 9] = elimination_solve_sudoku(&sudoku).unwrap();
         result += solved[0][0] * 100 + solved[0][1] * 10 + solved[0][2];
     }
-    println!("Result: {result}, took {total_time}ms");
     result
 }
 
@@ -45,15 +25,8 @@ pub fn solve_one() {
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
     ];
-    let now = Instant::now();
-    match elimination_solve_sudoku(&sudoku) {
-        Ok(x) => {
-            println!("sudoku solved in {} ms", now.elapsed().as_millis());
-            for line in x {
-                println!("{}", line.map(|x| { x.to_string() }).join(" "));
-            }
-        }
-        Err(err) => panic!("{}", err),
+    for line in elimination_solve_sudoku(&sudoku).unwrap() {
+        println!("{}", line.map(|x| { x.to_string() }).join(" "));
     }
 }
 

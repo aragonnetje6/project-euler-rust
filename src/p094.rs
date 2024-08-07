@@ -35,11 +35,7 @@ fn get_sum_of_all_integer_triangle_perimeters_under(n: i128) -> i128 {
         for perimeter in triangles {
             if perimeter <= n {
                 total += perimeter;
-                println!("perimeter: {perimeter}, total: {total}");
             }
-        }
-        if length % 10_000_000 == 0 {
-            println!("currently at length {length}, total: {total}");
         }
     }
     total

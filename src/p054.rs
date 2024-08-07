@@ -1,4 +1,4 @@
-use std::iter::zip;
+use std::{cmp::Ordering, iter::zip};
 
 use crate::file_io;
 
@@ -6,25 +6,29 @@ pub fn p054() -> i32 {
     let mut total = 0;
     for line in file_io::read_file("src/p054_poker.txt").split('\n') {
         let (mut hand1, mut hand2) = decode_hands(line);
-        hand1.sort_by_key(|x| -(x.value as i8));
-        hand2.sort_by_key(|x| -(x.value as i8));
+        hand1.sort_by_key(|x| x.value);
+        hand2.sort_by_key(|x| x.value);
         let (rank1, val1) = rank_hand(&hand1);
         let (rank2, val2) = rank_hand(&hand2);
-        if rank1 > rank2 {
-            total += 1;
-        } else if rank1 == rank2 {
-            if val1 > val2 {
-                total += 1;
-            } else if val1 == val2 {
-                for (highest1, highest2) in zip(&hand1, &hand2) {
-                    if highest1.value > highest2.value {
-                        total += 1;
-                        break;
-                    } else if highest1.value < highest2.value {
-                        break;
+        match rank1.cmp(&rank2) {
+            Ordering::Greater => total += 1,
+            Ordering::Equal => match val1.cmp(&val2) {
+                Ordering::Greater => total += 1,
+                Ordering::Equal => {
+                    for (highest1, highest2) in zip(&hand1, &hand2) {
+                        match highest1.get_value().cmp(&highest2.get_value()) {
+                            Ordering::Equal => {}
+                            Ordering::Less => break,
+                            Ordering::Greater => {
+                                total += 1;
+                                break;
+                            }
+                        }
                     }
                 }
-            }
+                Ordering::Less => {}
+            },
+            Ordering::Less => {}
         }
     }
     total

@@ -22,9 +22,8 @@ fn has_one_triangle(l: u32) -> bool {
             if d.pow(2) == h.pow(2) + w.pow(2) {
                 if found_one {
                     return false;
-                } else {
-                    found_one = true;
                 }
+                found_one = true;
             }
         }
     }

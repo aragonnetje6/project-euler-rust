@@ -21,9 +21,8 @@ fn get_all_triplets_under(n: i32, primes: &Vec<i32>) -> HashSet<i32> {
                 let total = forth_prime.pow(4) + subtotal;
                 if total >= n {
                     break;
-                } else {
-                    triplets.insert(total);
                 }
+                triplets.insert(total);
             }
         }
     }
